@@ -8,7 +8,7 @@ const CAT_API_KEY = "7dce790f-d813-4e57-9c5c-23417f84e587";
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
 var dt = require('./myfirstmodule.js');
-
+var prefix = "&";
 client.on('ready', () =>
 {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -16,38 +16,46 @@ client.on('ready', () =>
 
 });
 
-client.on('message',async msg =>
+client.on('message', async msg =>
 {
     const guild = client.guilds.get("193662219274158091")
     const scrub = guild.roles.find(x => x.name === "Scrub");
     const aids = guild.roles.find(x => x.name === "AIDS");
-    if (msg.content === 'ping')
+    if (msg.content === "?????")
+    {
+        msg.channel.send("https://i.ytimg.com/vi/F_1l9NV24ow/hqdefault.jpg")
+    }
+    if (msg.content === prefix + 'ping')
     {
         const m = await msg.channel.send("Ping?");
         m.edit(`Pong! Latency is ${m.createdTimestamp - msg.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
-        
+
     }
-    else if (msg.content === "meow")
+    else if (msg.content === prefix + 'test')
+    {
+        msg.channel.send(msg.author.discriminator);
+    }
+    else if (msg.content === prefix + "meow")
     {
         messageRecieved(msg);
     }
-    else if (msg.content === 'avatar')
+    else if (msg.content === prefix + 'avatar')
     {
         // Send the user's avatar URL
         msg.reply(msg.author.avatarURL);
     }
-    else if (msg.content.startsWith('addScrub'))
+    else if (msg.content.startsWith(prefix + 'addScrub'))
     {
         msg.mentions.members.first().addRole(scrub);
         msg.reply(msg.mentions.members.first().user + " is now a Scrub lol");
     }
-    else if (msg.content === "sauce")
+    else if (msg.content === prefix + "sauce")
     {
         const attachment = new Attachment('https://i.imgur.com/nSpDdY4.gif');
         msg.channel.send(`${msg.author},`, attachment);
     }
     //AIDS
-    else if (msg.content.startsWith('giveAIDS'))
+    else if (msg.content.startsWith(prefix + 'giveAIDS'))
     {
         if (msg.mentions.members.first())
         {
@@ -70,37 +78,33 @@ client.on('message',async msg =>
     }
 
     //lol
-    else if (msg.content === "don't type this")
+    else if (msg.content === prefix + "don't type this")
     {
         msg.author.send("lol")
     }
     //Time
-    else if (msg.content === "time")
+    else if (msg.content === prefix + "time")
     {
         msg.reply("It is currently " + dt.myDateTime())
     }
     //Annoy
-    else if (msg.content.startsWith("annoy"))
+   /* else if (msg.content.startsWith(prefix + "annoy"))
     {
+        msg.channel.send('Ok, annoying ' + msg.mentions.members.first().user);
         if (msg.mentions.members.first())
         {
-            msg.channel.send('Ok, annoying ' + msg.mentions.members.first().user);
-            msg.mentions.members.first().user.send("HO(e):peach::eyes:HO(e):peach::eyes:HO(e):peach::eyes: Merry DICKmas:eggplant::laughing::pray::shrug:‍♂️:laughing: I know y’all elf looking 🧝‍♀️ 🧝‍♂️ headasses out there have been motherfuckin’ NAUGHTY:eyes::kissing_heart::heart_eyes::flushed:all year :stuck_out_tongue_winking_eye:🤪:stuck_out_tongue_winking_eye::kissing_heart::heart_eyes: waiting :shrug:‍♂️:thinking:for that SWEET dick :eyes::ok_hand::eyes::ok_hand::eyes::eggplant:. well 🧐:nerd:🤨:smirk: let those chestNUTTS:peanuts: NUT :champagne::tada::flag_ke:ALL OVER :sweat_drops::umbrella:️:information_desk_person:‍♀️your favorite HOES🤱🧚‍♂️🧚‍♂️:couple_mm: and make sure you :smirk::stuck_out_tongue_closed_eyes::stuck_out_tongue_winking_eye:POP THAT PEPPERMINT PU$$AY:peach: :point_left::wave::left_facing_fist:BECAUSE SANTA:santa: :santa: :lips::kiss:IS CUMMING :eggplant: TO TOWN 🤯:flushed:🤩WITH THE BEST COCK :chicken: :rooster: YOUVE EVER HAD :eyes::pray:🤭:hushed::astonished::sob::weary:🤩 to SLEIGH 🛷 YOU UNDER THE mistleBLOW :massage:‍♀️🧠:stuck_out_tongue_closed_eyes: THIS christmASS! Bend this over your sluttiest reinHOES :stuck_out_tongue_winking_eye::stuck_out_tongue:🧐🤨in the next 69 sexonds :hugging::kissing_heart::heart_eyes::wink::relaxed:️or your PULL OUT game :eggplant::eyes: 🤯:eyes::sunglasses::eyes::eggplant:will be WEAK AS FUCK:scream::cold_sweat::tired_face: and your EAT ASS :scream::scream:in 2018 🤮:cowboy::mask:🤲:raised_back_of_hand::kiss::lips::eye::eyes::baby:!");
-            msg.mentions.members.first().user.send("HO(e):peach::eyes:HO(e):peach::eyes:HO(e):peach::eyes: Merry DICKmas:eggplant::laughing::pray::shrug:‍♂️:laughing: I know y’all elf looking 🧝‍♀️ 🧝‍♂️ headasses out there have been motherfuckin’ NAUGHTY:eyes::kissing_heart::heart_eyes::flushed:all year :stuck_out_tongue_winking_eye:🤪:stuck_out_tongue_winking_eye::kissing_heart::heart_eyes: waiting :shrug:‍♂️:thinking:for that SWEET dick :eyes::ok_hand::eyes::ok_hand::eyes::eggplant:. well 🧐:nerd:🤨:smirk: let those chestNUTTS:peanuts: NUT :champagne::tada::flag_ke:ALL OVER :sweat_drops::umbrella:️:information_desk_person:‍♀️your favorite HOES🤱🧚‍♂️🧚‍♂️:couple_mm: and make sure you :smirk::stuck_out_tongue_closed_eyes::stuck_out_tongue_winking_eye:POP THAT PEPPERMINT PU$$AY:peach: :point_left::wave::left_facing_fist:BECAUSE SANTA:santa: :santa: :lips::kiss:IS CUMMING :eggplant: TO TOWN 🤯:flushed:🤩WITH THE BEST COCK :chicken: :rooster: YOUVE EVER HAD :eyes::pray:🤭:hushed::astonished::sob::weary:🤩 to SLEIGH 🛷 YOU UNDER THE mistleBLOW :massage:‍♀️🧠:stuck_out_tongue_closed_eyes: THIS christmASS! Bend this over your sluttiest reinHOES :stuck_out_tongue_winking_eye::stuck_out_tongue:🧐🤨in the next 69 sexonds :hugging::kissing_heart::heart_eyes::wink::relaxed:️or your PULL OUT game :eggplant::eyes: 🤯:eyes::sunglasses::eyes::eggplant:will be WEAK AS FUCK:scream::cold_sweat::tired_face: and your EAT ASS :scream::scream:in 2018 🤮:cowboy::mask:🤲:raised_back_of_hand::kiss::lips::eye::eyes::baby:!");
-            msg.mentions.members.first().user.send("HO(e):peach::eyes:HO(e):peach::eyes:HO(e):peach::eyes: Merry DICKmas:eggplant::laughing::pray::shrug:‍♂️:laughing: I know y’all elf looking 🧝‍♀️ 🧝‍♂️ headasses out there have been motherfuckin’ NAUGHTY:eyes::kissing_heart::heart_eyes::flushed:all year :stuck_out_tongue_winking_eye:🤪:stuck_out_tongue_winking_eye::kissing_heart::heart_eyes: waiting :shrug:‍♂️:thinking:for that SWEET dick :eyes::ok_hand::eyes::ok_hand::eyes::eggplant:. well 🧐:nerd:🤨:smirk: let those chestNUTTS:peanuts: NUT :champagne::tada::flag_ke:ALL OVER :sweat_drops::umbrella:️:information_desk_person:‍♀️your favorite HOES🤱🧚‍♂️🧚‍♂️:couple_mm: and make sure you :smirk::stuck_out_tongue_closed_eyes::stuck_out_tongue_winking_eye:POP THAT PEPPERMINT PU$$AY:peach: :point_left::wave::left_facing_fist:BECAUSE SANTA:santa: :santa: :lips::kiss:IS CUMMING :eggplant: TO TOWN 🤯:flushed:🤩WITH THE BEST COCK :chicken: :rooster: YOUVE EVER HAD :eyes::pray:🤭:hushed::astonished::sob::weary:🤩 to SLEIGH 🛷 YOU UNDER THE mistleBLOW :massage:‍♀️🧠:stuck_out_tongue_closed_eyes: THIS christmASS! Bend this over your sluttiest reinHOES :stuck_out_tongue_winking_eye::stuck_out_tongue:🧐🤨in the next 69 sexonds :hugging::kissing_heart::heart_eyes::wink::relaxed:️or your PULL OUT game :eggplant::eyes: 🤯:eyes::sunglasses::eyes::eggplant:will be WEAK AS FUCK:scream::cold_sweat::tired_face: and your EAT ASS :scream::scream:in 2018 🤮:cowboy::mask:🤲:raised_back_of_hand::kiss::lips::eye::eyes::baby:!");
-            msg.mentions.members.first().user.send("HO(e):peach::eyes:HO(e):peach::eyes:HO(e):peach::eyes: Merry DICKmas:eggplant::laughing::pray::shrug:‍♂️:laughing: I know y’all elf looking 🧝‍♀️ 🧝‍♂️ headasses out there have been motherfuckin’ NAUGHTY:eyes::kissing_heart::heart_eyes::flushed:all year :stuck_out_tongue_winking_eye:🤪:stuck_out_tongue_winking_eye::kissing_heart::heart_eyes: waiting :shrug:‍♂️:thinking:for that SWEET dick :eyes::ok_hand::eyes::ok_hand::eyes::eggplant:. well 🧐:nerd:🤨:smirk: let those chestNUTTS:peanuts: NUT :champagne::tada::flag_ke:ALL OVER :sweat_drops::umbrella:️:information_desk_person:‍♀️your favorite HOES🤱🧚‍♂️🧚‍♂️:couple_mm: and make sure you :smirk::stuck_out_tongue_closed_eyes::stuck_out_tongue_winking_eye:POP THAT PEPPERMINT PU$$AY:peach: :point_left::wave::left_facing_fist:BECAUSE SANTA:santa: :santa: :lips::kiss:IS CUMMING :eggplant: TO TOWN 🤯:flushed:🤩WITH THE BEST COCK :chicken: :rooster: YOUVE EVER HAD :eyes::pray:🤭:hushed::astonished::sob::weary:🤩 to SLEIGH 🛷 YOU UNDER THE mistleBLOW :massage:‍♀️🧠:stuck_out_tongue_closed_eyes: THIS christmASS! Bend this over your sluttiest reinHOES :stuck_out_tongue_winking_eye::stuck_out_tongue:🧐🤨in the next 69 sexonds :hugging::kissing_heart::heart_eyes::wink::relaxed:️or your PULL OUT game :eggplant::eyes: 🤯:eyes::sunglasses::eyes::eggplant:will be WEAK AS FUCK:scream::cold_sweat::tired_face: and your EAT ASS :scream::scream:in 2018 🤮:cowboy::mask:🤲:raised_back_of_hand::kiss::lips::eye::eyes::baby:!");
-            msg.mentions.members.first().user.send("HO(e):peach::eyes:HO(e):peach::eyes:HO(e):peach::eyes: Merry DICKmas:eggplant::laughing::pray::shrug:‍♂️:laughing: I know y’all elf looking 🧝‍♀️ 🧝‍♂️ headasses out there have been motherfuckin’ NAUGHTY:eyes::kissing_heart::heart_eyes::flushed:all year :stuck_out_tongue_winking_eye:🤪:stuck_out_tongue_winking_eye::kissing_heart::heart_eyes: waiting :shrug:‍♂️:thinking:for that SWEET dick :eyes::ok_hand::eyes::ok_hand::eyes::eggplant:. well 🧐:nerd:🤨:smirk: let those chestNUTTS:peanuts: NUT :champagne::tada::flag_ke:ALL OVER :sweat_drops::umbrella:️:information_desk_person:‍♀️your favorite HOES🤱🧚‍♂️🧚‍♂️:couple_mm: and make sure you :smirk::stuck_out_tongue_closed_eyes::stuck_out_tongue_winking_eye:POP THAT PEPPERMINT PU$$AY:peach: :point_left::wave::left_facing_fist:BECAUSE SANTA:santa: :santa: :lips::kiss:IS CUMMING :eggplant: TO TOWN 🤯:flushed:🤩WITH THE BEST COCK :chicken: :rooster: YOUVE EVER HAD :eyes::pray:🤭:hushed::astonished::sob::weary:🤩 to SLEIGH 🛷 YOU UNDER THE mistleBLOW :massage:‍♀️🧠:stuck_out_tongue_closed_eyes: THIS christmASS! Bend this over your sluttiest reinHOES :stuck_out_tongue_winking_eye::stuck_out_tongue:🧐🤨in the next 69 sexonds :hugging::kissing_heart::heart_eyes::wink::relaxed:️or your PULL OUT game :eggplant::eyes: 🤯:eyes::sunglasses::eyes::eggplant:will be WEAK AS FUCK:scream::cold_sweat::tired_face: and your EAT ASS :scream::scream:in 2018 🤮:cowboy::mask:🤲:raised_back_of_hand::kiss::lips::eye::eyes::baby:!");
-            msg.mentions.members.first().user.send("HO(e):peach::eyes:HO(e):peach::eyes:HO(e):peach::eyes: Merry DICKmas:eggplant::laughing::pray::shrug:‍♂️:laughing: I know y’all elf looking 🧝‍♀️ 🧝‍♂️ headasses out there have been motherfuckin’ NAUGHTY:eyes::kissing_heart::heart_eyes::flushed:all year :stuck_out_tongue_winking_eye:🤪:stuck_out_tongue_winking_eye::kissing_heart::heart_eyes: waiting :shrug:‍♂️:thinking:for that SWEET dick :eyes::ok_hand::eyes::ok_hand::eyes::eggplant:. well 🧐:nerd:🤨:smirk: let those chestNUTTS:peanuts: NUT :champagne::tada::flag_ke:ALL OVER :sweat_drops::umbrella:️:information_desk_person:‍♀️your favorite HOES🤱🧚‍♂️🧚‍♂️:couple_mm: and make sure you :smirk::stuck_out_tongue_closed_eyes::stuck_out_tongue_winking_eye:POP THAT PEPPERMINT PU$$AY:peach: :point_left::wave::left_facing_fist:BECAUSE SANTA:santa: :santa: :lips::kiss:IS CUMMING :eggplant: TO TOWN 🤯:flushed:🤩WITH THE BEST COCK :chicken: :rooster: YOUVE EVER HAD :eyes::pray:🤭:hushed::astonished::sob::weary:🤩 to SLEIGH 🛷 YOU UNDER THE mistleBLOW :massage:‍♀️🧠:stuck_out_tongue_closed_eyes: THIS christmASS! Bend this over your sluttiest reinHOES :stuck_out_tongue_winking_eye::stuck_out_tongue:🧐🤨in the next 69 sexonds :hugging::kissing_heart::heart_eyes::wink::relaxed:️or your PULL OUT game :eggplant::eyes: 🤯:eyes::sunglasses::eyes::eggplant:will be WEAK AS FUCK:scream::cold_sweat::tired_face: and your EAT ASS :scream::scream:in 2018 🤮:cowboy::mask:🤲:raised_back_of_hand::kiss::lips::eye::eyes::baby:!");
-            msg.mentions.members.first().user.send("HO(e):peach::eyes:HO(e):peach::eyes:HO(e):peach::eyes: Merry DICKmas:eggplant::laughing::pray::shrug:‍♂️:laughing: I know y’all elf looking 🧝‍♀️ 🧝‍♂️ headasses out there have been motherfuckin’ NAUGHTY:eyes::kissing_heart::heart_eyes::flushed:all year :stuck_out_tongue_winking_eye:🤪:stuck_out_tongue_winking_eye::kissing_heart::heart_eyes: waiting :shrug:‍♂️:thinking:for that SWEET dick :eyes::ok_hand::eyes::ok_hand::eyes::eggplant:. well 🧐:nerd:🤨:smirk: let those chestNUTTS:peanuts: NUT :champagne::tada::flag_ke:ALL OVER :sweat_drops::umbrella:️:information_desk_person:‍♀️your favorite HOES🤱🧚‍♂️🧚‍♂️:couple_mm: and make sure you :smirk::stuck_out_tongue_closed_eyes::stuck_out_tongue_winking_eye:POP THAT PEPPERMINT PU$$AY:peach: :point_left::wave::left_facing_fist:BECAUSE SANTA:santa: :santa: :lips::kiss:IS CUMMING :eggplant: TO TOWN 🤯:flushed:🤩WITH THE BEST COCK :chicken: :rooster: YOUVE EVER HAD :eyes::pray:🤭:hushed::astonished::sob::weary:🤩 to SLEIGH 🛷 YOU UNDER THE mistleBLOW :massage:‍♀️🧠:stuck_out_tongue_closed_eyes: THIS christmASS! Bend this over your sluttiest reinHOES :stuck_out_tongue_winking_eye::stuck_out_tongue:🧐🤨in the next 69 sexonds :hugging::kissing_heart::heart_eyes::wink::relaxed:️or your PULL OUT game :eggplant::eyes: 🤯:eyes::sunglasses::eyes::eggplant:will be WEAK AS FUCK:scream::cold_sweat::tired_face: and your EAT ASS :scream::scream:in 2018 🤮:cowboy::mask:🤲:raised_back_of_hand::kiss::lips::eye::eyes::baby:!");
-            msg.mentions.members.first().user.send("HO(e):peach::eyes:HO(e):peach::eyes:HO(e):peach::eyes: Merry DICKmas:eggplant::laughing::pray::shrug:‍♂️:laughing: I know y’all elf looking 🧝‍♀️ 🧝‍♂️ headasses out there have been motherfuckin’ NAUGHTY:eyes::kissing_heart::heart_eyes::flushed:all year :stuck_out_tongue_winking_eye:🤪:stuck_out_tongue_winking_eye::kissing_heart::heart_eyes: waiting :shrug:‍♂️:thinking:for that SWEET dick :eyes::ok_hand::eyes::ok_hand::eyes::eggplant:. well 🧐:nerd:🤨:smirk: let those chestNUTTS:peanuts: NUT :champagne::tada::flag_ke:ALL OVER :sweat_drops::umbrella:️:information_desk_person:‍♀️your favorite HOES🤱🧚‍♂️🧚‍♂️:couple_mm: and make sure you :smirk::stuck_out_tongue_closed_eyes::stuck_out_tongue_winking_eye:POP THAT PEPPERMINT PU$$AY:peach: :point_left::wave::left_facing_fist:BECAUSE SANTA:santa: :santa: :lips::kiss:IS CUMMING :eggplant: TO TOWN 🤯:flushed:🤩WITH THE BEST COCK :chicken: :rooster: YOUVE EVER HAD :eyes::pray:🤭:hushed::astonished::sob::weary:🤩 to SLEIGH 🛷 YOU UNDER THE mistleBLOW :massage:‍♀️🧠:stuck_out_tongue_closed_eyes: THIS christmASS! Bend this over your sluttiest reinHOES :stuck_out_tongue_winking_eye::stuck_out_tongue:🧐🤨in the next 69 sexonds :hugging::kissing_heart::heart_eyes::wink::relaxed:️or your PULL OUT game :eggplant::eyes: 🤯:eyes::sunglasses::eyes::eggplant:will be WEAK AS FUCK:scream::cold_sweat::tired_face: and your EAT ASS :scream::scream:in 2018 🤮:cowboy::mask:🤲:raised_back_of_hand::kiss::lips::eye::eyes::baby:!");
+                msg.mentions.members.first().user.send("HO(e):peach::eyes:HO(e):peach::eyes:HO(e):peach::eyes: Merry DICKmas:eggplant::laughing::pray::shrug:‍♂️:laughing: I know y’all elf looking 🧝‍♀️ 🧝‍♂️ headasses out there have been motherfuckin’ NAUGHTY:eyes::kissing_heart::heart_eyes::flushed:all year :stuck_out_tongue_winking_eye:🤪:stuck_out_tongue_winking_eye::kissing_heart::heart_eyes: waiting :shrug:‍♂️:thinking:for that SWEET dick :eyes::ok_hand::eyes::ok_hand::eyes::eggplant:. well 🧐:nerd:🤨:smirk: let those chestNUTTS:peanuts: NUT :champagne::tada::flag_ke:ALL OVER :sweat_drops::umbrella:️:information_desk_person:‍♀️your favorite HOES🤱🧚‍♂️🧚‍♂️:couple_mm: and make sure you :smirk::stuck_out_tongue_closed_eyes::stuck_out_tongue_winking_eye:POP THAT PEPPERMINT PU$$AY:peach: :point_left::wave::left_facing_fist:BECAUSE SANTA:santa: :santa: :lips::kiss:IS CUMMING :eggplant: TO TOWN 🤯:flushed:🤩WITH THE BEST COCK :chicken: :rooster: YOUVE EVER HAD :eyes::pray:🤭:hushed::astonished::sob::weary:🤩 to SLEIGH 🛷 YOU UNDER THE mistleBLOW :massage:‍♀️🧠:stuck_out_tongue_closed_eyes: THIS christmASS! Bend this over your sluttiest reinHOES :stuck_out_tongue_winking_eye::stuck_out_tongue:🧐🤨in the next 69 sexonds :hugging::kissing_heart::heart_eyes::wink::relaxed:️or your PULL OUT game :eggplant::eyes: 🤯:eyes::sunglasses::eyes::eggplant:will be WEAK AS FUCK:scream::cold_sweat::tired_face: and your EAT ASS :scream::scream:in 2018 🤮:cowboy::mask:🤲:raised_back_of_hand::kiss::lips::eye::eyes::baby:!");
+                msg.mentions.members.first().user.send("Send the cancel command to stop");
+            
         }
+
         else
         {
             msg.channel.send("What a fucking idiot you are " + msg.author);
             msg.channel.send("You need to mention someone for me to annoy them");
         }
-    }
-    else if (msg.content === "flip")
+    }*/
+    else if (msg.content === prefix + "flip")
     {
         var num = Math.round(Math.random());
         if (num === 0)
@@ -112,7 +116,7 @@ client.on('message',async msg =>
             msg.channel.send("Heads");
         }
     }
-    
+
 });
 
 async function messageRecieved(message)
