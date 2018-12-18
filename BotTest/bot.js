@@ -25,10 +25,10 @@ client.on('message', async msg =>
 {
     if (client.guild === "193662219274158091") 
     {
-    const guild = client.guilds.get("193662219274158091");
-    const scrub = guild.roles.find(x => x.name === "Scrub");
-    const aids = guild.roles.find(x => x.name === "AIDS");
-    const hyperAids = guild.roles.find(x => x.name === "HyperAIDS");
+        const guild = client.guilds.get("193662219274158091");
+        const scrub = guild.roles.find(x => x.name === "Scrub");
+        const aids = guild.roles.find(x => x.name === "AIDS");
+        const hyperAids = guild.roles.find(x => x.name === "HyperAIDS");
     }
     if (msg.content === "?????")
     {
@@ -47,7 +47,6 @@ client.on('message', async msg =>
     if (msg.content.startsWith(prefix+"dice")) 
     {
         var amount = msg.content.substr((prefix+"dice").length);
-        msg.reply(amount);
         var total = 0;
         for (var i = 0; i < amount; i++) {
              diceroll = Math.floor(Math.random() * 5.999 + 1);
@@ -55,6 +54,12 @@ client.on('message', async msg =>
              total += diceroll;
          } 
          msg.channel.send(total + " is your final score!");
+    }
+    if (msg.content.startsWith(prefix+"dSides")) 
+    {
+        var amount = msg.content.substr((prefix+"dSides ").length);
+        diceroll = Math.floor(Math.random() * (amount-0.001) + 1);
+        msg.channel.send("Your magical number is "+diceroll);
     }
 	/*else if (msg.content === prefix + 'dice')
 	{
