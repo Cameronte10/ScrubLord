@@ -72,7 +72,7 @@ client.on('message', async msg =>
                 msg.mentions.members.first().addRole(aids);
                 var chance = Math.floor(Math.random() * 10);
                 //if (chance == 6)
-				if (chance >= 1 && chance <= 5)
+				if (chance >= 0 && chance <= 5)
                 {
                     msg.mentions.members.first().addRole(hyperAids);
                     setTimeout(function () { msg.mentions.members.first().removeRole(hyperAids); }, 20000)
