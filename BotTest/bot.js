@@ -27,16 +27,20 @@ client.on('message', async msg =>
     {
         msg.channel.send("https://i.ytimg.com/vi/F_1l9NV24ow/hqdefault.jpg")
     }
-    if (msg.content === prefix + 'ping')
+    if (msg.member.roles.find(x => x.name === "HyperAIDS"))
+    {
+        msg.delete();
+    }
+	if (msg.content === prefix + 'ping')
     {
         const m = await msg.channel.send("Ping?");
         m.edit(`Pong! Latency is ${m.createdTimestamp - msg.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
 
     }
-    if (msg.member.roles.find(x => x.name === "HyperAIDS"))
-    {
-        msg.delete();
-    }
+	else if (msg.content === prefix + 'dice')
+	{
+		msg.channel.send("Dice roll: " + Math.floor(Math.random() * 6));
+	}
     else if (msg.content === prefix + 'test')
     {
         msg.channel.send(msg.author.discriminator);
