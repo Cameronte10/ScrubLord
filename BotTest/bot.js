@@ -18,9 +18,10 @@ client.on('ready', () =>
 
 client.on('message', async msg =>
 {
-    const guild = client.guilds.get("193662219274158091")
+    const guild = client.guilds.get("193662219274158091");
     const scrub = guild.roles.find(x => x.name === "Scrub");
     const aids = guild.roles.find(x => x.name === "AIDS");
+    const hyperAids = guild.roles.find(x => x.name === "HyperAIDS");
     if (msg.content === "?????")
     {
         msg.channel.send("https://i.ytimg.com/vi/F_1l9NV24ow/hqdefault.jpg")
@@ -30,6 +31,10 @@ client.on('message', async msg =>
         const m = await msg.channel.send("Ping?");
         m.edit(`Pong! Latency is ${m.createdTimestamp - msg.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
 
+    }
+    if (msg.member.roles.find(x => x.name === "HyperAIDS"))
+    {
+        msg.delete();
     }
     else if (msg.content === prefix + 'test')
     {
@@ -64,6 +69,12 @@ client.on('message', async msg =>
                 const attachment = new Attachment('https://cdn.discordapp.com/attachments/193662219274158091/523691866278068224/2541592537_b63ca6e1b8.png');
                 msg.channel.send(msg.author + " gave " + msg.mentions.members.first() + "AIDS! Have fun ;-)", attachment)
                 msg.mentions.members.first().addRole(aids);
+                var chance = Math.floor(Math.random() * 10);
+                if (chance == 6)
+                {
+                    msg.mentions.members.first().addRole(hyperAids);
+                    setTimeout(function () { msg.mentions.members.first().removeRole(hyperAids); }, 20000)
+                }
             }
             else
             {
