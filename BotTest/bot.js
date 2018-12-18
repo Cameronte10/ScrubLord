@@ -13,6 +13,7 @@ var prefix = "&";
 var diceroll1 = 0;
 var diceroll2 = 0;
 var diceroll3 = 0;
+//https://discordapp.com/oauth2/authorize?client_id=524728234558881792&permissions=8&scope=bot  TestBotInvite
 client.on('ready', () =>
 {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -22,10 +23,13 @@ client.on('ready', () =>
 
 client.on('message', async msg =>
 {
+    if (client.guild === "193662219274158091") 
+    {
     const guild = client.guilds.get("193662219274158091");
     const scrub = guild.roles.find(x => x.name === "Scrub");
     const aids = guild.roles.find(x => x.name === "AIDS");
     const hyperAids = guild.roles.find(x => x.name === "HyperAIDS");
+    }
     if (msg.content === "?????")
     {
         msg.channel.send("https://i.ytimg.com/vi/F_1l9NV24ow/hqdefault.jpg")
@@ -40,7 +44,19 @@ client.on('message', async msg =>
         m.edit(`Pong! Latency is ${m.createdTimestamp - msg.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
 
     }
-	else if (msg.content === prefix + 'dice')
+    if (msg.content.startsWith(prefix+"dice")) 
+    {
+        var amount = msg.content.substr((prefix+"dice").length);
+        msg.reply(amount);
+        var total = 0;
+        for (var i = 0; i < amount; i++) {
+             diceroll = Math.floor(Math.random() * 5.999 + 1);
+             msg.channel.send("Roll "+(i+1)+" is: "+diceroll);
+             total += diceroll;
+         } 
+         msg.channel.send(total + " is your final score!");
+    }
+	/*else if (msg.content === prefix + 'dice')
 	{
 		msg.channel.send("Dice roll: " + Math.floor(Math.random() * 5.999 + 1));
 	}
@@ -55,7 +71,7 @@ client.on('message', async msg =>
 		}
 		else
 			msg.channel.send("Dice rolls: " + diceroll1 + ", " + diceroll2 + ", " + diceroll3 + " Total: " + (diceroll1 + diceroll2 + diceroll3))
-	}
+	}*/
     else if (msg.content === prefix + 'test')
     {
         msg.channel.send(msg.author.discriminator);
@@ -202,4 +218,4 @@ async function loadImage(sub_id)
 
 }
 
-client.login('MzIwODI1NTAxNDUzMjU0NjU3.Dvi-9g.SyAr1u6KmBoig90vbjSzfjnZGY4');
+client.login(/*'MzIwODI1NTAxNDUzMjU0NjU3.Dvi-9g.SyAr1u6KmBoig90vbjSzfjnZGY4'*/'NTI0NzI4MjM0NTU4ODgxNzky.DvsTPQ.b2mUR9d3RCCnSbDAxds8MaX0Ih8'/*TestBot*/);
