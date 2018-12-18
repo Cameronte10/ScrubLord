@@ -10,6 +10,9 @@ var events = require('events');
 var eventEmitter = new events.EventEmitter();
 var dt = require('./myfirstmodule.js');
 var prefix = "&";
+var diceroll1 = 0;
+var diceroll2 = 0;
+var diceroll3 = 0;
 client.on('ready', () =>
 {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -39,7 +42,19 @@ client.on('message', async msg =>
     }
 	else if (msg.content === prefix + 'dice')
 	{
-		msg.channel.send("Dice roll: " + Math.floor(Math.random() * 6));
+		msg.channel.send("Dice roll: " + Math.floor(Math.random() * 5.999 + 1));
+	}
+	else if (msg.content === prefix + 'tripledie')
+	{
+		diceroll1 = Math.floor(Math.random() * 5.999 + 1);
+		diceroll2 = Math.floor(Math.random() * 5.999 + 1);
+		diceroll3 = Math.floor(Math.random() * 5.999 + 1);
+		if (diceroll1 == diceroll2 && diceroll1 == diceroll3)
+		{
+			msg.channel.send("Dice rolls: " + diceroll1 + ", " + diceroll2 + ", " + diceroll3 + "    Triple!" + " Total: " + (diceroll1 + diceroll2 + diceroll3))
+		}
+		else
+			msg.channel.send("Dice rolls: " + diceroll1 + ", " + diceroll2 + ", " + diceroll3 + " Total: " + (diceroll1 + diceroll2 + diceroll3))
 	}
     else if (msg.content === prefix + 'test')
     {
