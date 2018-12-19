@@ -20,19 +20,20 @@ client.on('ready', () =>
     console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
 
 });
+if (client.guild === "193662219274158091") 
+{
+    const guild = client.guilds.get("193662219274158091");
+    const scrub = guild.roles.find(x => x.name === "Scrub");
+    const aids = guild.roles.find(x => x.name === "AIDS");
+    const hyperAids = guild.roles.find(x => x.name === "HyperAIDS");
+}
 //
 client.on('message', async msg =>
 {
-    if(message.author.bot) return;
+    if(msg.author.bot) return;
     else
     {
-    if (client.guild === "193662219274158091") 
-    {
-        const guild = client.guilds.get("193662219274158091");
-        const scrub = guild.roles.find(x => x.name === "Scrub");
-        const aids = guild.roles.find(x => x.name === "AIDS");
-        const hyperAids = guild.roles.find(x => x.name === "HyperAIDS");
-    }
+    
     if (msg.content === prefix+"help") 
     {
         msg.author.send({embed: {
@@ -217,4 +218,4 @@ async function loadImage(sub_id)
 
 }
 
-client.login(/*'MzIwODI1NTAxNDUzMjU0NjU3.Dvi-9g.SyAr1u6KmBoig90vbjSzfjnZGY4'*/'NTI0NzI4MjM0NTU4ODgxNzky.DvsTPQ.b2mUR9d3RCCnSbDAxds8MaX0Ih8'/*TestBot*/);
+client.login('MzIwODI1NTAxNDUzMjU0NjU3.Dvi-9g.SyAr1u6KmBoig90vbjSzfjnZGY4'/*'NTI0NzI4MjM0NTU4ODgxNzky.DvsTPQ.b2mUR9d3RCCnSbDAxds8MaX0Ih8'*//*TestBot*/);
