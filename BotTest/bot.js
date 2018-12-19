@@ -10,6 +10,7 @@ var events = require('events');
 var eventEmitter = new events.EventEmitter();
 var dt = require('./myfirstmodule.js');
 var prefix = "&";
+var hyperaids% = 50.0;
 //var diceroll1 = 0;
 //var diceroll2 = 0;
 //var diceroll3 = 0;
@@ -121,9 +122,9 @@ client.on('message', async msg =>
                 const attachment = new Attachment('https://cdn.discordapp.com/attachments/193662219274158091/523691866278068224/2541592537_b63ca6e1b8.png');
                 msg.channel.send(msg.author + " gave " + msg.mentions.members.first() + "AIDS! Have fun ;-)", attachment)
                 msg.mentions.members.first().addRole(aids);
-                var chance = Math.floor(Math.random() * 10);
+                var chance = Math.random() * 100;
                 //if (chance == 6)
-				if (chance >= 0 && chance <= 5)
+				if (chance >= 0 && chance <= hyperaids%)
                 {
                     msg.mentions.members.first().addRole(hyperAids);
                     setTimeout(function () { msg.mentions.members.first().removeRole(hyperAids); }, 20000)
