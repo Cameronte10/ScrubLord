@@ -10,7 +10,7 @@ var events = require('events');
 var eventEmitter = new events.EventEmitter();
 var dt = require('./myfirstmodule.js');
 var prefix = "&";
-var hyperaids% = 50.0;
+var hyperaidschance = 50.0;
 //var diceroll1 = 0;
 //var diceroll2 = 0;
 //var diceroll3 = 0;
@@ -124,7 +124,7 @@ client.on('message', async msg =>
                 msg.mentions.members.first().addRole(aids);
                 var chance = Math.random() * 100;
                 //if (chance == 6)
-				if (chance >= 0 && chance <= hyperaids%)
+				if (chance >= 0 && chance <= hyperaidschance)
                 {
                     msg.mentions.members.first().addRole(hyperAids);
                     setTimeout(function () { msg.mentions.members.first().removeRole(hyperAids); }, 20000)
