@@ -41,7 +41,7 @@ client.on('message', async msg =>
             color: 3447003,
             fields: [{
             name: "Commands",
-            value: "Noah Levvit-Brown"
+            value: "Prefix: &"
         },
         {
             name: prefix+"ping",
