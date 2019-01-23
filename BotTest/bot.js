@@ -58,7 +58,7 @@ client.on('message', async msg =>
         ],
         }})
     }
-    if (msg.content === "?????")
+    if (msg.content === "???")
     {
         msg.channel.send("https://i.ytimg.com/vi/F_1l9NV24ow/hqdefault.jpg")
     }
@@ -89,10 +89,6 @@ client.on('message', async msg =>
         diceroll = Math.floor(Math.random() * (amount-0.001) + 1);
         msg.channel.send("Your magical number is "+diceroll);
     }
-    if (msg.content === prefix + 'test')
-    {
-        msg.channel.send(msg.author.discriminator);
-    }
     if (msg.content === prefix + "meow")
     {
         messageRecieved(msg);
@@ -113,7 +109,7 @@ client.on('message', async msg =>
         msg.channel.send(`${msg.author},`, attachment);
     }
     //AIDS
-    if (msg.content.startsWith(prefix + 'giveAIDS'))
+    if (msg.content.startsWith(prefix + 'aids'))
     {
         if (msg.mentions.members.first())
         {
@@ -141,6 +137,21 @@ client.on('message', async msg =>
             msg.channel.send("You need to mention someone to be able to give them AIDS");
         }
     }
+
+    if (msg.content.startsWith(prefix + "kys"))
+        {
+            if (msg.mentions.members.first())
+            {
+                const attachment = new Attachment('https://thumbs.gfycat.com/DefensiveAdorableIbadanmalimbe-max-1mb.gif');
+                msg.channel.send("You should kill yourself " + msg.mentions.members.first(), attachment);
+            }
+        }
+    if (msg.content.startsWith(prefix + "egg"))
+        {
+
+            const attachment = new Attachment('https://media1.tenor.com/images/86060b827368bde61369714df72a4297/tenor.gif');
+            msg.channel.send(msg.mentions.members.first(), attachment);
+        }
 
     //lol
     if (msg.content === prefix + "don't type this")
