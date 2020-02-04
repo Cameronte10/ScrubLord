@@ -2,6 +2,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const { Attachment } = require('discord.js');
+const publicIp = require('public-ip');
 const querystring = require('querystring');
 const r2 = require('r2');
 const CAT_API_URL = "https://api.thecatapi.com/"
@@ -10,7 +11,7 @@ var events = require('events');
 var eventEmitter = new events.EventEmitter();
 var dt = require('./myfirstmodule.js');
 var prefix = "&";
-var hyperaidschance = 50.0;
+var hyperaidschance = 75.0;
 //var diceroll1 = 0;
 //var diceroll2 = 0;
 //var diceroll3 = 0;
@@ -31,114 +32,121 @@ if (client.guild === "193662219274158091")
 //
 client.on('message', async msg =>
 {
-    if(msg.author.bot) return;
+    if (msg.author.bot) return;
     else
     {
-    
-    if (msg.content === prefix+"help") 
-    {
-        msg.author.send({embed: {
-            color: 3447003,
-            fields: [{
-            name: "Commands",
-            value: "Prefix: &"
-        },
-        {
-            name: prefix+"ping",
-            value: "Pings the bot"
-        },
-        {
-            name: prefix+"giveAIDS",
-            value: "Give your friends **AIDS**, but only if you have it"
-        },
-        {
-            name: prefix+"dice (number)",
-            value: "Rolls (number) of d6's"
-        }
-        ],
-        }})
-    }
-    if (msg.content === "???")
-    {
-        msg.channel.send("https://i.ytimg.com/vi/F_1l9NV24ow/hqdefault.jpg")
-    }
-    if (msg.member.roles.find(x => x.name === "HyperAIDS"))
-    {
-        msg.delete();
-    }
-	if (msg.content === prefix + 'ping')
-    {
-        const m = await msg.channel.send("Ping?");
-        m.edit(`Pong! Latency is ${m.createdTimestamp - msg.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
 
-    }
-    if (msg.content.startsWith(prefix+"dice")) 
-    {
-        var amount = msg.content.substr((prefix+"dice").length);
-        var total = 0;
-        for (var i = 0; i < amount; i++) {
-             diceroll = Math.floor(Math.random() * 5.999 + 1);
-             msg.channel.send("Roll "+(i+1)+" is: "+diceroll);
-             total += diceroll;
-         } 
-         msg.channel.send(total + " is your final score!");
-    }
-    if (msg.content.startsWith(prefix+"dSides")) 
-    {
-        var amount = msg.content.substr((prefix+"dSides ").length);
-        diceroll = Math.floor(Math.random() * (amount-0.001) + 1);
-        msg.channel.send("Your magical number is "+diceroll);
-    }
-    if (msg.content === prefix + "meow")
-    {
-        messageRecieved(msg);
-    }
-    if (msg.content === prefix + 'avatar')
-    {
-        // Send the user's avatar URL
-        msg.reply(msg.author.avatarURL);
-    }
-    if (msg.content.startsWith(prefix + 'addScrub'))
-    {
-        msg.mentions.members.first().addRole(scrub);
-        msg.reply(msg.mentions.members.first().user + " is now a Scrub lol");
-    }
-    if (msg.content === prefix + "sauce")
-    {
-        const attachment = new Attachment('https://i.imgur.com/nSpDdY4.gif');
-        msg.channel.send(`${msg.author},`, attachment);
-    }
-    //AIDS
-    if (msg.content.startsWith(prefix + 'aids'))
-    {
-        if (msg.mentions.members.first())
+        if (msg.content === prefix + "help") 
         {
-            if (msg.member.roles.find(x => x.name === "AIDS"))
+            msg.author.send({
+                embed: {
+                    color: 3447003,
+                    fields: [{
+                        name: "Commands",
+                        value: "Prefix: &"
+                    },
+                    {
+                        name: prefix + "ping",
+                        value: "Pings the bot"
+                    },
+                    {
+                        name: prefix + "giveAIDS",
+                        value: "Give your friends **AIDS**, but only if you have it"
+                    },
+                    {
+                        name: prefix + "dice (number)",
+                        value: "Rolls (number) of d6's"
+                    }
+                    ],
+                }
+            })
+        }
+        if (msg.content === "???")
+        {
+            msg.channel.send("https://i.ytimg.com/vi/F_1l9NV24ow/hqdefault.jpg")
+        }
+        if (msg.member.roles.find(x => x.name === "HyperAIDS"))
+        {
+            msg.delete();
+        }
+        if (msg.content === prefix + 'ping')
+        {
+            const m = await msg.channel.send("Ping?");
+            m.edit(`Pong! Latency is ${m.createdTimestamp - msg.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
+
+        }
+        if (msg.content.startsWith(prefix + "dice")) 
+        {
+            var amount = msg.content.substr((prefix + "dice").length);
+            var total = 0;
+            for (var i = 0; i < amount; i++)
             {
-                const attachment = new Attachment('https://cdn.discordapp.com/attachments/193662219274158091/523691866278068224/2541592537_b63ca6e1b8.png');
-                msg.channel.send(msg.author + " gave " + msg.mentions.members.first() + "AIDS! Have fun ;-)", attachment)
-                msg.mentions.members.first().addRole(aids);
-                var chance = Math.random() * 100;
-                //if (chance == 6)
-				if (chance >= 0 && chance <= hyperaidschance)
+                diceroll = Math.floor(Math.random() * 5.999 + 1);
+                msg.channel.send("Roll " + (i + 1) + " is: " + diceroll);
+                total += diceroll;
+            }
+            msg.channel.send(total + " is your final score!");
+        }
+        if (msg.content.startsWith(prefix + "dSides")) 
+        {
+            var amount = msg.content.substr((prefix + "dSides ").length);
+            diceroll = Math.floor(Math.random() * (amount - 0.001) + 1);
+            msg.channel.send("Your magical number is " + diceroll);
+        }
+        if (msg.content === prefix + "meow")
+        {
+            messageRecieved(msg);
+        }
+        if (msg.content === prefix + "minecraftIP")
+        {
+            msg.reply(await publicIp.v4());
+        }
+        if (msg.content === prefix + 'avatar')
+        {
+            // Send the user's avatar URL
+            msg.reply(msg.author.avatarURL);
+        }
+        if (msg.content.startsWith(prefix + 'addScrub'))
+        {
+            msg.mentions.members.first().addRole(scrub);
+            msg.reply(msg.mentions.members.first().user + " is now a Scrub lol");
+        }
+        if (msg.content === prefix + "sauce")
+        {
+            const attachment = new Attachment('https://i.imgur.com/nSpDdY4.gif');
+            msg.channel.send(`${msg.author},`, attachment);
+        }
+        //AIDS
+        if (msg.content.startsWith(prefix + 'aids'))
+        {
+            if (msg.mentions.members.first())
+            {
+                if (msg.member.roles.find(x => x.name === "AIDS"))
                 {
-                    msg.mentions.members.first().addRole(hyperAids);
-                    setTimeout(function () { msg.mentions.members.first().removeRole(hyperAids); }, 20000)
+                    const attachment = new Attachment('https://cdn.discordapp.com/attachments/193662219274158091/523691866278068224/2541592537_b63ca6e1b8.png');
+                    msg.channel.send(msg.author + " gave " + msg.mentions.members.first() + " AIDS! Have fun ;-)", attachment)
+                    msg.mentions.members.first().addRole(aids);
+                    var chance = Math.random() * 100;
+                    //if (chance == 6)
+                    if (chance >= 0 && chance <= hyperaidschance)
+                    {
+                        msg.mentions.members.first().addRole(hyperAids);
+                        setTimeout(function () { msg.mentions.members.first().removeRole(hyperAids); }, 200000)
+                    }
+                }
+                else
+                {
+                    msg.channel.send("Sorry " + msg.author + ", you do not appear to have AIDS");
                 }
             }
             else
             {
-                msg.channel.send("Sorry " + msg.author + ", you do not appear to have AIDS");
+                msg.channel.send("What a fucking idiot you are " + msg.author);
+                msg.channel.send("You need to mention someone to be able to give them AIDS");
             }
         }
-        else
-        {
-            msg.channel.send("What a fucking idiot you are " + msg.author);
-            msg.channel.send("You need to mention someone to be able to give them AIDS");
-        }
-    }
 
-    if (msg.content.startsWith(prefix + "kys"))
+        if (msg.content.startsWith(prefix + "kys"))
         {
             if (msg.mentions.members.first())
             {
@@ -146,38 +154,39 @@ client.on('message', async msg =>
                 msg.channel.send("You should kill yourself " + msg.mentions.members.first(), attachment);
             }
         }
-    if (msg.content.startsWith(prefix + "egg"))
+        if (msg.content.startsWith(prefix + "egg"))
         {
 
             const attachment = new Attachment('https://media1.tenor.com/images/86060b827368bde61369714df72a4297/tenor.gif');
             msg.channel.send(msg.mentions.members.first(), attachment);
         }
 
-    //lol
-    if (msg.content === prefix + "don't type this")
-    {
-        msg.author.send("lol")
-    }
-    //Time
-    if (msg.content === prefix + "time")
-    {
-        msg.reply("It is currently " + dt.myDateTime())
-    }
-
-    if (msg.content === prefix + "flip")
-    {
-        var num = Math.round(Math.random());
-        if (num === 0)
+        //lol
+        if (msg.content === prefix + "don't type this")
         {
-            msg.channel.send("Tails");
+            msg.author.send("lol")
         }
-        else
+        //Time
+        if (msg.content === prefix + "time")
         {
-            msg.channel.send("Heads");
+            msg.reply("It is currently " + dt.myDateTime())
         }
-    }
 
-}});
+        if (msg.content === prefix + "flip")
+        {
+            var num = Math.round(Math.random());
+            if (num === 0)
+            {
+                msg.channel.send("Tails");
+            }
+            else
+            {
+                msg.channel.send("Heads");
+            }
+        }
+
+    }
+});
 
 async function messageRecieved(message)
 {
