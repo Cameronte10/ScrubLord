@@ -12,6 +12,7 @@ var eventEmitter = new events.EventEmitter();
 var dt = require('./myfirstmodule.js');
 var prefix = "&";
 var hyperaidschance = 75.0;
+var token = open("token", "r").read();
 //var diceroll1 = 0;
 //var diceroll2 = 0;
 //var diceroll3 = 0;
@@ -239,4 +240,4 @@ async function loadImage(sub_id)
 
 }
 
-client.login('MzIwODI1NTAxNDUzMjU0NjU3.Dvi-9g.SyAr1u6KmBoig90vbjSzfjnZGY4'/*'NTI0NzI4MjM0NTU4ODgxNzky.DvsTPQ.b2mUR9d3RCCnSbDAxds8MaX0Ih8'*//*TestBot*/);
+client.login();
